@@ -1,0 +1,48 @@
+'''
+Created on 28/02/2013
+
+@author: jgoenetxea
+'''
+import sys
+import re
+
+def scaleLine(criteria, line, scaleValue):
+    #dataPattern = re.compile(r"width=\"[\d+]\"")
+    findNumbers = re.compile(r"\d+")
+    matchWidth = findWidth.findall(line)
+    print matchWidth
+    for l in matchWidth: # secuencia entera
+        newWidth = l
+        matchNumbers = findNumbers.findall(l)
+        print matchNumbers
+        for n in matchNumbers:  # numero dentro de la secuencia
+            newValue = str(int(n)/scaleValue)
+            newWidth = newWidth.replace(n, newValue)
+        # replace the full secuence
+        line = line.replace(l, newWidth, 1)
+    return line
+
+# Read the attributes
+attrSize = len(sys.argv)-1
+if (attrSize < 1): 
+    print "Error: No se ha especificado fichero alguno. Usage: command storyboardfilename" 
+    exit(0)
+attrList = sys.argv[1:]
+
+filename = attrList[0]
+f = open( filename, "r" )
+fileLines = f.readlines()
+f.close()
+
+scaleValue = 2
+
+of = open( filename+"_temp", "w" )
+findWidth = re.compile(r"width=\"\d+\"")
+for line in fileLines:
+    
+    newLine = scaleLine(findWidth, line, scaleValue)
+    of.write(newLine)
+    
+of.close()
+print "End"
+

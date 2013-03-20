@@ -1,0 +1,34 @@
+'''
+Created on 28/02/2013
+
+@author: jgoenetxea
+'''
+import sys
+import re
+
+# Read the attributes
+attrSize = len(sys.argv)-1
+if (attrSize < 3): 
+    print "Error: No se ha especificado fichero alguno. Usage: command storyboardfilename" 
+    exit(0)
+attrList = sys.argv[1:]
+
+#filename = attrList[0]
+filename = "sample.storyboard"
+f = open( filename, "r" )
+fileLines = f.readLines()
+f.close()
+
+of = open( filename+"_temp", "w" )
+for line in fileLines:
+    dataPattern = re.compile(r"width=\"\d+\"")
+    match = dataPattern.find(line)
+    field1 = match.group(1)
+    field2 = match.group(2)
+    
+    
+    of.write(line)
+    
+of.close()
+print "End"
+

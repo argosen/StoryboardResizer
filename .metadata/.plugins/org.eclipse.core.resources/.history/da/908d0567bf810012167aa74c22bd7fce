@@ -1,0 +1,29 @@
+'''
+Created on 28/02/2013
+
+@author: jgoenetxea
+'''
+import sys
+
+# Read the attributes
+attrSize = len(sys.argv)-1
+if (attrSize < 3): 
+    print "Error: No se ha especificado fichero alguno. Usage: command storyboardfilename" 
+    exit(0)
+attrList = sys.argv[1:]
+
+filename = attrList[0]
+f = open( filename, "r" )
+fileLines = f.readLines()
+f.close()
+
+of = open( filename+"_temp", "w" )
+for line in fileLines:
+    
+    
+    
+    of.write(line)
+    
+of.close()
+print "End"
+
